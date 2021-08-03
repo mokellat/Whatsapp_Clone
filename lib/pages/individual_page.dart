@@ -165,6 +165,7 @@ class _IndividualPageState extends State<IndividualPage> {
                                         icon: Icon(Icons.attach_file),
                                         onPressed: () {
                                           showModalBottomSheet(
+                                            clipBehavior: Clip.antiAliasWithSaveLayer,
                                               backgroundColor:
                                                   Colors.transparent,
                                               context: context,
@@ -225,77 +226,75 @@ class _IndividualPageState extends State<IndividualPage> {
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         margin: EdgeInsets.only(left: 13, right: 13, bottom: 63),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                SizedBox(
-                  width: 60,
-                ),
-                iconcreation(
-                    string: "Document",
-                    color: Colors.deepPurple[700],
-                    icons: Icons.insert_drive_file),
-                SizedBox(
-                  width: 40,
-                ),
-                iconcreation(
-                    string: "Camera",
-                    color: Colors.pink[700],
-                    icons: Icons.camera),
-                SizedBox(
-                  width: 40,
-                ),
-                iconcreation(
-                    string: "Gallery",
-                    color: Colors.purple,
-                    icons: Icons.image),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 60,
-                ),
-                iconcreation(
-                    string: "Document",
-                    color: Colors.deepPurple[700],
-                    icons: Icons.insert_drive_file),
-                SizedBox(
-                  width: 40,
-                ),
-                iconcreation(
-                    string: "Camera",
-                    color: Colors.pink[700],
-                    icons: Icons.camera),
-                SizedBox(
-                  width: 40,
-                ),
-                iconcreation(
-                    string: "Gallery",
-                    color: Colors.purple,
-                    icons: Icons.image),
-              ],
-            ),
-             SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 60,
-                ),
-                iconcreation(
-                    string: "Document",
-                    color: Colors.deepPurple[700],
-                    icons: Icons.insert_drive_file),
-              ],
-            ),
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  iconcreation(
+                      string: "Document",
+                      color: Colors.deepPurple[700],
+                      icons: Icons.insert_drive_file),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  iconcreation(
+                      string: "Camera",
+                      color: Colors.pink[700],
+                      icons: Icons.camera),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  iconcreation(
+                      string: "Gallery",
+                      color: Colors.purple,
+                      icons: Icons.image),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  iconcreation(
+                      string: "Audio",
+                      color: Colors.orange[700],
+                      icons: Icons.headset),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  iconcreation(
+                      string: "Room",
+                      color: Colors.indigo,
+                      icons: Icons.videocam_rounded),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  iconcreation(
+                      string: "Location",
+                      color: Colors.teal[800],
+                      icons: Icons.room),
+                ],
+              ),
+               SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: 60,
+                  ),
+                  iconcreation(
+                      string: "Contact",
+                      color: Colors.blue,
+                      icons: Icons.person),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -304,12 +303,15 @@ class _IndividualPageState extends State<IndividualPage> {
   Widget iconcreation({String string, Color color, IconData icons}) {
     return Column(
       children: [
-        CircleAvatar(
-          backgroundColor: color,
-          radius: 28,
-          child: Icon(
-            icons,
-            color: Colors.white,
+        InkWell(
+          onTap: (){},
+          child: CircleAvatar(
+            backgroundColor: color,
+            radius: 28,
+            child: Icon(
+              icons,
+              color: Colors.white,
+            ),
           ),
         ),
         SizedBox(
@@ -328,7 +330,7 @@ class _IndividualPageState extends State<IndividualPage> {
         setState(() {
           _controller.text += emoji.emoji;
         });
-      },
+      }, 
     );
   }
 }

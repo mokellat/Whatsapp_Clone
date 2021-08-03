@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/CustomUi/Custom_card.dart';
 import 'package:whatsapp_clone/CustomUi/chat_model.dart';
+import 'package:whatsapp_clone/Screens/SelectContact.dart';
 
 // print(filter(zip(list)))
 //
@@ -24,8 +25,7 @@ class _ChatPageState extends State<ChatPage> {
         name: "Gon Freecss",
         icon: "persn.svg",
         time: "21:30",
-        currentMessage:
-            "it doesn't matter anymre",
+        currentMessage: "it doesn't matter anymre",
         isagroup: false),
     ChatModel(
         name: "Phantom Troup",
@@ -45,7 +45,10 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.chat),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SelectContact()));
+        },
       ),
       body: ListView.builder(
         itemBuilder: (context, index) => CustomCard(

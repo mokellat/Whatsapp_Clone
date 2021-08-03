@@ -1,0 +1,38 @@
+import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/CustomUi/chat_model.dart';
+import 'package:whatsapp_clone/Screens/CreateGroup.dart';
+
+class ButtonCard extends StatelessWidget {
+  const ButtonCard({Key key, this.contact, this.icon}) : super(key: key);
+  final ChatModel contact;
+  final Icon icon;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(7.0),
+      child: ListTile(
+        leading: CircleAvatar(
+            backgroundColor: Colors.greenAccent[400],
+            child: IconButton(
+              alignment: Alignment.topLeft,
+              onPressed: () {},
+              icon: icon,
+              color: Colors.white,
+            )),
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              contact.name,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
