@@ -92,8 +92,10 @@ class _SelectContactState extends State<SelectContact> {
         itemBuilder: (context, index) => (index < 2)
             ? InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (builder) => CreateGroup()));
+                  if (index == 0) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (builder) => CreateGroup()));
+                  }
                 },
                 child: ButtonCard(
                   contact: contacts[index],

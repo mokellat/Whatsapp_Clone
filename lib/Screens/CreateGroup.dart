@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/CustomUi/AvatarCard.dart';
 import 'package:whatsapp_clone/CustomUi/chat_model.dart';
 import 'package:whatsapp_clone/CustomUi/contactCard.dart';
 
@@ -78,37 +79,70 @@ class _CreateGroupState extends State<CreateGroup> {
             })
           ],
         ),
-        body: ListView.builder(
-            itemCount: contacts.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  if (contacts[index].groupcheck == false) {
-                    setState(() {
-                      // print('before');
-                      // print(contacts[index].groupcheck);
-                      contacts[index].groupcheck = true;
-                      // print('after');
-                      // print(contacts[index].groupcheck);
-                      groups.add(contacts[index]);
-                      print('-------------------');
-                    });
-                  } else {
-                    setState(() {
-                      // print('before');
-                      // print(contacts[index].groupcheck);
-                      contacts[index].groupcheck = false;
-                      // print('after');
-                      // print(contacts[index].groupcheck);
-                      groups.remove(contacts[index]);
-                      print('-------------------');
-                    });
+        body: Stack(
+          children: [
+            ListView.builder(
+                itemCount: contacts.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return (Container(
+                      height: groups.length > 0 ? 90 : 10,
+                    ));
                   }
-                },
-                child: ContactCard(
-                  contact: contacts[index],
-                ),
-              );
-            }));
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        if (contacts[index - 1].groupcheck == true) {
+                          groups.remove(contacts[index - 1]);
+                          contacts[index - 1].groupcheck = false;
+                        }
+                        else
+                        {
+                          groups.add(contacts[index - 1]);
+                          contacts[index - 1].groupcheck = true;
+                        }
+                      });
+                    },
+                    child: ContactCard(
+                      contact: contacts[index - 1],
+                    ),
+                  );
+                }),
+            (groups.length > 0)
+                ? Column(
+                    children: [
+                      Container(
+                        height: 75,
+                        color: Colors.white,
+                        child: ListView.builder(
+                          itemCount: contacts.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            if (contacts[index].groupcheck == true) {
+                              return InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    groups.remove(contacts[index]);
+                                    contacts[index].groupcheck = false;
+                                  });
+                                },
+                                child: (AvatarCard(
+                                  contact: contacts[index],
+                                )),
+                              );
+                            } else {
+                              return (Container());
+                            }
+                          },
+                        ),
+                      ),
+                      Divider(
+                        thickness: 1,
+                      ),
+                    ],
+                  )
+                : Container(),
+          ],
+        ));
   }
 }

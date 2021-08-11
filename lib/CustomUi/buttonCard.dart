@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/CustomUi/chat_model.dart';
-import 'package:whatsapp_clone/Screens/CreateGroup.dart';
 
 class ButtonCard extends StatelessWidget {
   const ButtonCard({Key key, this.contact, this.icon}) : super(key: key);
@@ -19,10 +18,11 @@ class ButtonCard extends StatelessWidget {
               icon: icon,
               color: Colors.white,
             )),
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        title: Row(
           children: [
+            SizedBox(
+              width: 10,
+            ),
             Text(
               contact.name,
               style: TextStyle(
