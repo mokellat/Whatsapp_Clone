@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/pages/Camera_page.dart';
 import 'package:whatsapp_clone/pages/chat_page.dart';
 
 class Homescreen extends StatefulWidget {
@@ -74,7 +75,7 @@ class _HomescreenState extends State<Homescreen> with TickerProviderStateMixin {
       body: TabBarView(
         controller: _controller,
         children: [
-          Text("camera"),
+          CameraPage(),
           ChatPage(),
           Text("status"),
           Text("calls"),
