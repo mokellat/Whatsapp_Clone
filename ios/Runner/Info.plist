@@ -43,6 +43,10 @@
 	<false/>
 	<key>NSCameraUsageDescription</key>
 	<string>Explanation on why the camera access is needed.</string>
-
+	<key>NSAppTransportSecurity</key>
+	<dict>
+  		<key>NSAllowsArbitraryLoads</key>
+  		<true/>
+	</dict>
 </dict>
 </plist>

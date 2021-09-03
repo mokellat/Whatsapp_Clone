@@ -32,6 +32,7 @@ dependencies:
   emoji_picker: ^0.1.0
   shared_preferences: ^0.5.4
   camera: ^0.8.1+7
+  video_player: 
   path_provider:
   path:
 
