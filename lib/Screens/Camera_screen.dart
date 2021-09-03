@@ -1,11 +1,13 @@
+import 'dart:math';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:whatsapp_clone/pages/CameraViewer.dart';
 import 'package:whatsapp_clone/pages/VideoViewer.dart';
 
 List<CameraDescription> cameras;
+bool flash = false;
 // XFile videopathAssign;
 
 class CameraScreen extends StatefulWidget {
@@ -18,6 +20,8 @@ class _CameraScreenState extends State<CameraScreen> {
   CameraController _cameraController;
   Future<void> cameravalue;
   bool isRecording = false;
+  bool camerafront = true;
+  double rotate = 0;
   // File videopath;
   XFile videopath;
 
@@ -52,7 +56,7 @@ class _CameraScreenState extends State<CameraScreen> {
                   // If the Future is complete, display the preview.
                   return Container(
                       height: MediaQuery.of(context).size.height,
-                      width:  MediaQuery.of(context).size.width,
+                      width: MediaQuery.of(context).size.width,
                       child: CameraPreview(_cameraController));
                 } else {
                   // Otherwise, display a loading indicator.
@@ -74,12 +78,23 @@ class _CameraScreenState extends State<CameraScreen> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          
+                          setState(() {
+                            flash = !flash;
+                          });
+                          if (flash == true)
+                            _cameraController.setFlashMode(FlashMode.always);
+                          else
+                            _cameraController.setFlashMode(FlashMode.off);
                         },
-                        icon: Icon(
-                          Icons.flash_off,
-                          color: Colors.white,
-                        ),
+                        icon: flash == false
+                            ? Icon(
+                                Icons.flash_off,
+                                color: Colors.white,
+                              )
+                            : Icon(
+                                Icons.flash_on,
+                                color: Colors.white,
+                              ),
                       ),
                       GestureDetector(
                         onLongPress: () async {
@@ -109,7 +124,7 @@ class _CameraScreenState extends State<CameraScreen> {
                         child: isRecording
                             ? Icon(
                                 Icons.radio_button_on,
-                                size: 80,
+                                size: 60,
                                 color: Colors.red,
                               )
                             : SvgPicture.asset(
@@ -120,11 +135,26 @@ class _CameraScreenState extends State<CameraScreen> {
                               ),
                       ),
                       IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.cameraswitch,
-                          color: Colors.white,
+                        icon: Transform.rotate(
+                          angle: rotate,
+                          child: Icon(
+                            Icons.cameraswitch,
+                            color: Colors.white,
+                          ),
                         ),
+                        onPressed: () {
+                          int cameraPosition = camerafront ? 0 : 1;
+                          setState(() {
+                            camerafront = !camerafront;
+                            rotate += pi;
+                          });
+                          _cameraController = CameraController(
+                            cameras[cameraPosition],
+                            ResolutionPreset.medium,
+                            imageFormatGroup: ImageFormatGroup.yuv420,
+                          );
+                          cameravalue = _cameraController.initialize();
+                        },
                       ),
                     ],
                   ),
