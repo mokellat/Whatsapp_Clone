@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:whatsapp_clone/pages/Camera_page.dart';
 import 'package:whatsapp_clone/pages/chat_page.dart';
+import 'package:whatsapp_clone/pages/statusPage.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({Key key}) : super(key: key);
@@ -77,7 +78,7 @@ class _HomescreenState extends State<Homescreen> with TickerProviderStateMixin {
         children: [
           CameraPage(),
           ChatPage(),
-          Text("status"),
+          StatusPage(),
           Text("calls"),
         ],
       ),
