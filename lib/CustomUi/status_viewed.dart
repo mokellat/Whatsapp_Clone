@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:whatsapp_clone/pages/Story_Viewer.dart';
 
 class StatusViewed extends StatefulWidget {
   const StatusViewed(
@@ -20,46 +21,52 @@ class _StatusViewedState extends State<StatusViewed> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 15, left: 15),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: CustomPaint(
-              painter: InheritPaint(
-                  color: Colors.teal,
-                  color1: Colors.white,
-                  numStatus: widget.statusNum),
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                backgroundImage: AssetImage(widget.image),
-                radius: 27,
+      child: InkWell(
+        onTap: (){
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => StoryViewer()));
+        },
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: CustomPaint(
+                painter: InheritPaint(
+                    color: Colors.teal,
+                    color1: Colors.white,
+                    numStatus: widget.statusNum),
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  backgroundImage: AssetImage(widget.image),
+                  radius: 23,
+                ),
               ),
             ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Text(
-                  widget.name,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    widget.name,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              Text(
-                widget.time,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey[700],
-                  // fontWeight: FontWeight.bold,
+                Text(
+                  widget.time,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey[700],
+                    // fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

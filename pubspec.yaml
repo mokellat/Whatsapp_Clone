@@ -33,6 +33,7 @@ dependencies:
   shared_preferences: ^0.5.4
   camera: ^0.8.1+7
   bubble: ^1.2.1
+  story_view: ^0.13.1
   video_player: 
   path_provider:
   path:
